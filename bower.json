@@ -1,0 +1,23 @@
+{
+  "name": "Walking Skeleton Demo",
+  "version": "0.0.0",
+  "description": "walking skeleton architecture sketch",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "toaster": "~0.4.10",
+    "toastr": "~2.1.0",
+    "angular": "~1.3.14",
+    "angular-resource": "~1.3.14",
+    "angular-route": "~1.3.14",
+    "bootstrap": "~3.3.2"
+  }
+}
