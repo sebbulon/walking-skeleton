@@ -26,7 +26,7 @@ app.use(stylus.middleware(
 
 app.use(express.static(__dirname + '/public')); 
 
-mongoose.connect('mongodb://localhost/walkingskeleton');
+mongoose.connect('mongodb://sebastian.weikart:test123@ds039291.mongolab.com:39291/suchcommercetest');
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error... '));
@@ -53,7 +53,7 @@ app.get('*', function(req, resp) {
 	});
 
 });
-var port = 3030;
+var port = process.env.port || 3030;
 
 app.listen(port);
 
