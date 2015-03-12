@@ -1,59 +1,25 @@
 var express = require('express');
-var stylus = require('stylus');
-logger = require('morgan');
-bodyParser = require('body-parser');
-mongoose = require('mongoose');
+
+
+
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = express();
 
+var config = require('./server/config/config')[env];
 
-function compile(str, path) {
-	return stylus(str).set('filename', path);
-};
+require('./server/config/express')(app, config);
 
-app.set('views', __dirname + '/server/views');
-app.set('view engine', 'jade');
-app.use(logger('dev'));
-app.use(stylus.middleware(
-{
-	src: __dirname + '/public',
-	compile: compile
+require('./server/config/mongoose')(config);
 
-}
-));
-
-app.use(express.static(__dirname + '/public')); 
-
-mongoose.connect('mongodb://sebastian.weikart:test123@ds039291.mongolab.com:39291/suchcommercetest');
-var db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error... '));
-db.once('open', function callback() {
-	console.log('walkingskeleton db opened');
-});
-
-var messageSchema = mongoose.Schema({message : String});
-var Message = mongoose.model('Message', messageSchema);
-var mongoMessage;
-Message.findOne().exec(function(err, messageDoc) { 
-	mongoMessage = messageDoc.message;
-} );
+require('./server/config/routes')(app);
 
 
-app.get('/partials/:partialPath', function(req, res) {
-	res.render('partials/' + req.params.partialPath);
 
-});
 
-app.get('*', function(req, resp) {
-	resp.render('index', {
-		mongoMessage: mongoMessage
-	});
 
-});
-var port = process.env.PORT || 3030;
+var port = config.port;
 
 app.listen(port);
 
