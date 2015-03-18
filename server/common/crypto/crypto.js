@@ -2,7 +2,7 @@
  * Created by sebastian.weikart on 16/03/2015.
  */
 var crypto = require('crypto');
-
+//TODO SW use bcrypt instead
 module.exports = {
 
     createSalt: function () {
