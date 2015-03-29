@@ -13,6 +13,11 @@ module.exports =  {
         db: 'mongodb://sebastian.weikart:test123@ds039291.mongolab.com:39291/suchcommercetest',
         rootPath: rootPath,
         port: process.env.PORT || 80
+    },
+    test: {
+        db: 'mongodb://sebastian.weikart:test123@ds039291.mongolab.com:39291/test',
+        rootPath: rootPath,
+        port: process.env.PORT || 80
     }
 
 }

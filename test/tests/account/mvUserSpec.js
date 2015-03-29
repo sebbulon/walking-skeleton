@@ -21,4 +21,12 @@ describe('mvUser', function() {
 
         }))
     })
-})
+});
+describe('mvAuth', function() {
+    beforeEach(module('app'));
+
+    describe('createUser', function() {
+
+
+    })
+});

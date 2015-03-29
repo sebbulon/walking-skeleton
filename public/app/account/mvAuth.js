@@ -15,6 +15,21 @@ angular.module('app').service('mvAuth', function($http, mvIdentity, $q, mvUser) 
             });
             return dfd.promise;
         },
+
+        updateCurrentUser: function(newUserData) {
+
+            var dfd = $q.defer();
+            var clone  = angular.copy(mvIdentity.currentUser);
+            angular.extend(clone, newUserData);
+
+            clone.$update().then(function() {
+                mvIdentity.currentUser = newUserData;
+                dfd.resolve();
+            }, function(response) {
+                dfd.reject(response.data.reason);
+            });
+            return dfd.promise;
+        },
         authenticateUser: function(username, password) {
             var dfd = $q.defer();
             $http.post('/login', {username: username, password: password}).then(function(response){
@@ -41,6 +56,13 @@ angular.module('app').service('mvAuth', function($http, mvIdentity, $q, mvUser) 
 
         authorizeCurrentUserForRoute: function(role) {
             if(mvIdentity.isAuthorized('admin')) {
+                return true;
+            } else {
+                return $q.reject('not authorized');
+            }
+        },
+        authorizeAuthenticatedUserForRoute: function() {
+            if(mvIdentity.isAuthenticated()) {
                 return true;
             } else {
                 return $q.reject('not authorized');

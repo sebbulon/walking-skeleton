@@ -13,7 +13,8 @@ module.exports = function(app) {
     app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
 
 
-    app.post('/api/users', users.createUser);
+    app.post('/api/users', auth.requiresApiLogin, users.createUser);
+    app.put('/api/users', auth.requiresApiLogin, users.updateUser);
 
     app.get('/partials/*', function(req, res) {
         console.log('request for partial ' + req.params[0] );

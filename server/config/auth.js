@@ -3,7 +3,8 @@
  */
 var passport = require('passport');
 module.exports.authenticate =  function(req, res, next) {
-    console.log('request for /login with request ' + req.params.username);
+    req.body.username = req.body.username.toLocaleLowerCase();
+    console.log('request for /login with request ' +req.body.username);
     var auth = passport.authenticate('local', function(err, user) {
         if(err) {
             console.log('some error happened while authenticating...');

@@ -30,6 +30,7 @@
     "karma-firefox-launcher": "^0.1.4",
     "karma-ie-launcher": "^0.1.5",
     "karma-mocha": "^0.1.10",
-    "mocha": "^2.2.1"
+    "mocha": "^2.2.1",
+    "supertest": "^0.15.0"
   }
 }

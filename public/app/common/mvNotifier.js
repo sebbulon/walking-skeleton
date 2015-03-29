@@ -7,6 +7,13 @@ angular.module('app').value('mvToastr', toastr);
 
 
 angular.module('app').factory('mvNotifier', function(mvToastr) {
+
+
+    mvToastr.options = {
+        "closeButton": true
+
+    };
+
     return {
         notifySuccess: function(msg) {
             mvToastr.success(msg);
