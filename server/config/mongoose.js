@@ -3,7 +3,8 @@
  */
 
 var mongoose = require('mongoose'),
-    userModel = require('../api/models/users')
+    userModel = require('../api/models/users'),
+    courseModel = require('../api/models/Courses')
 ;
 
 module.exports = function(config) {
@@ -18,5 +19,5 @@ module.exports = function(config) {
     });
 
     userModel.createDefaultUsers();
-
+    courseModel.createDefaultCourses();
 }

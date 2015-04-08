@@ -5,6 +5,7 @@
 var auth = require('./auth'),
     mongoose = require('mongoose'),
     users = require('../api/controllers/users'),
+    courses = require('../api/controllers/courses'),
    User = mongoose.model('User') ;
 
 
@@ -15,6 +16,12 @@ module.exports = function(app) {
 
     app.post('/api/users', auth.requiresApiLogin, users.createUser);
     app.put('/api/users', auth.requiresApiLogin, users.updateUser);
+
+
+    app.get('/api/courses', courses.getCourses);
+
+
+
 
     app.get('/partials/*', function(req, res) {
         console.log('request for partial ' + req.params[0] );
@@ -30,6 +37,10 @@ module.exports = function(app) {
         }
 
     );
+
+    app.all('/api/*', function(req, res) {
+        res.sendStatus(404);
+    });
 
     app.get('*', function(req, resp) {
         console.log('request for ' + req.params[0]);
